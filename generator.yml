@@ -1,0 +1,61 @@
+modules:
+  fs_hw:
+    walk:
+      # Core state tables
+      - 1.3.6.1.4.1.52642.1.1.10.2.21.1.6   # fsFanStateTable (work/stop)
+      - 1.3.6.1.4.1.52642.1.1.10.2.21.1.5   # fsPowerStateTable (PSU detailed state)
+      - 1.3.6.1.4.1.52642.1.1.10.2.21.1.4   # fsModuleTempStateTable (normal/warning)
+      # “Overall-ish” states
+      - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2   # fsDeviceInfoTable (fsDevicePowerStatus)
+      - 1.3.6.1.4.1.52642.1.1.10.2.1.1.18   # fsSystemElectricalSourceIsNormalTable (PSU normal)
+      - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21   # fsSystemFanIsNormalTable (fan normal)
+
+    lookups:
+      # Descriptive labels for fan/PSU detailed tables
+      - source_indexes: [fsFanStateDeviceIndex, fsFanStateIndex]
+        lookup: fsFanStateFanDescr
+        drop_source_indexes: true
+      - source_indexes: [fsPowerStateDeviceIndex, fsPowerStateIndex]
+        lookup: fsPowerStatePowerDescr
+        drop_source_indexes: true
+
+      # Label PSU "is normal" rows; fan name intentionally omitted
+      - source_indexes: [1]
+        lookup: fsSystemElectricalSourceName
+        drop_source_indexes: true
+
+      # Optional: label the device/chassis row
+      - source_indexes: [fsDeviceInfoIndex]
+        lookup: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2   # fsDeviceInfoDescr
+        drop_source_indexes: true
+
+    overrides:
+      # Export enums as state sets
+      1.3.6.1.4.1.52642.1.1.10.2.21.1.6.1.3: { type: EnumAsStateSet }  # fsFanState
+      1.3.6.1.4.1.52642.1.1.10.2.21.1.5.1.3: { type: EnumAsStateSet }  # fsPowerState
+      1.3.6.1.4.1.52642.1.1.10.2.21.1.4.1.3: { type: EnumAsStateSet }  # fsModuleTempState
+      1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.4: { type: EnumAsStateSet }  # fsDevicePowerStatus
+      1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.2: { type: EnumAsStateSet }  # fsSystemElectricalSourceIsNormal
+      1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.2: { type: EnumAsStateSet }  # fsSystemFanIsNormal
+
+      # Hide helper index/descr metrics (still usable for lookups)
+      fsFanStateDeviceIndex: { ignore: true }
+      fsFanStateIndex:       { ignore: true }
+      fsFanStateFanDescr:    { ignore: true }
+
+      fsPowerStateDeviceIndex:  { ignore: true }
+      fsPowerStateIndex:        { ignore: true }
+      fsPowerStatePowerDescr:   { ignore: true }
+
+      fsModuleTempStateDeviceIndex: { ignore: true }
+      fsModuleTempStateIndex:       { ignore: true }
+
+      fsDeviceInfoIndex:      { ignore: true }
+      fsDeviceInfoDescr:      { ignore: true }
+
+      fsSystemElectricalSourceIsNormalIndex: { ignore: true }
+      fsSystemElectricalSourceName:          { ignore: true }
+
+      fsSystemFanIsNormalIndex: { ignore: true }
+      fsSystemFanName:          { ignore: true }   # fan name intentionally not exported
+
