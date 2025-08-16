@@ -1,0 +1,248 @@
+# WARNING: This file was auto-generated using snmp_exporter generator, manual changes will be lost.
+modules:
+  fs_hw:
+    walk:
+    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.18
+    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.4
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.5
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.6
+    metrics:
+    - name: fsSystemElectricalSourceIsNormal
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.2
+      type: EnumAsStateSet
+      help: This object displays whether an electrical source is normal or not. -
+        1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.2
+      indexes:
+      - labelname: fsSystemElectricalSourceIsNormalIndex
+        type: gauge
+      enum_values:
+        1: noexist
+        2: existnopower
+        3: existreadypower
+        4: normal
+        5: powerbutabnormal
+        6: unknow
+    - name: fsSystemFanIsNormal
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.2
+      type: EnumAsStateSet
+      help: This object displays whether an fan is normal or not. - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.2
+      indexes:
+      - labelname: fsSystemFanIsNormalIndex
+        type: gauge
+      enum_values:
+        1: noexist
+        2: existnopower
+        3: existreadypower
+        4: normal
+        5: powerbutabnormal
+        6: unknow
+    - name: fsSystemFanSpeed
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.4
+      type: gauge
+      help: This object displays the fan's speed. - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.4
+      indexes:
+      - labelname: fsSystemFanIsNormalIndex
+        type: gauge
+    - name: fsDeviceInfoSlotNumber
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.3
+      type: gauge
+      help: The number of slots exists on the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.3
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDevicePowerStatus
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.4
+      type: EnumAsStateSet
+      help: The power status of device - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.4
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+      enum_values:
+        1: rpsNoLink
+        2: rpsLinkAndNoPower
+        3: rpsLinkAndReadyForPower
+        4: rpsLinkAndPower
+    - name: fsDeviceMacAddress
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.5
+      type: PhysAddress48
+      help: The physical address of device - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.5
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDevicePriority
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.6
+      type: gauge
+      help: The device priority value - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.6
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDeviceAlias
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.7
+      type: DisplayString
+      help: Alias of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.7
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDeviceSWVersion
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.8
+      type: DisplayString
+      help: Description of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.8
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDeviceHWVersion
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.9
+      type: DisplayString
+      help: Description of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.9
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDeviceSerialNumber
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.10
+      type: DisplayString
+      help: Serial number of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.10
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsDeviceOid
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.11
+      type: OctetString
+      help: Oid number of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.11
+      indexes:
+      - labelname: fsDeviceInfoIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsDeviceInfoIndex
+        labelname: fsDeviceInfoDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+        type: DisplayString
+      - labels: []
+        labelname: fsDeviceInfoIndex
+    - name: fsModuleTempState
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.4.1.3
+      type: EnumAsStateSet
+      help: The module temperature state. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.4.1.3
+      indexes:
+      - labelname: fsModuleTempStateDeviceIndex
+        type: gauge
+      - labelname: fsModuleTempStateIndex
+        type: gauge
+      enum_values:
+        1: tempNormal
+        2: tempWarning
+    - name: fsPowerState
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.5.1.3
+      type: EnumAsStateSet
+      help: Power state. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.5.1.3
+      indexes:
+      - labelname: fsPowerStateDeviceIndex
+        type: gauge
+      - labelname: fsPowerStateIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsPowerStateDeviceIndex
+        - fsPowerStateIndex
+        labelname: fsPowerStatePowerDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.5.1.4
+        type: DisplayString
+      - labels: []
+        labelname: fsPowerStateDeviceIndex
+      - labels: []
+        labelname: fsPowerStateIndex
+      enum_values:
+        1: noLink
+        2: linkAndNoPower
+        3: linkAndReadyForPower
+        4: linkAndPower
+        5: linkAndPowerAbnormal
+    - name: fsFanState
+      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.6.1.3
+      type: EnumAsStateSet
+      help: Fan state. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.6.1.3
+      indexes:
+      - labelname: fsFanStateDeviceIndex
+        type: gauge
+      - labelname: fsFanStateIndex
+        type: gauge
+      lookups:
+      - labels:
+        - fsFanStateDeviceIndex
+        - fsFanStateIndex
+        labelname: fsFanStateFanDescr
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.6.1.4
+        type: DisplayString
+      - labels: []
+        labelname: fsFanStateDeviceIndex
+      - labels: []
+        labelname: fsFanStateIndex
+      enum_values:
+        1: work
+        2: stop
