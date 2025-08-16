@@ -2,12 +2,16 @@
 modules:
   fs_hw:
     walk:
-    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.18
-    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21
-    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2
-    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.4
-    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.5
-    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.6
+    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.2
+    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.3
+    - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.2
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.4
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.4.1.3
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.5.1.3
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.5.1.4
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.6.1.3
+    - 1.3.6.1.4.1.52642.1.1.10.2.21.1.6.1.4
     metrics:
     - name: fsSystemElectricalSourceIsNormal
       oid: 1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.2
@@ -17,6 +21,14 @@ modules:
       indexes:
       - labelname: fsSystemElectricalSourceIsNormalIndex
         type: gauge
+      lookups:
+      - labels:
+        - fsSystemElectricalSourceIsNormalIndex
+        labelname: fsSystemElectricalSourceName
+        oid: 1.3.6.1.4.1.52642.1.1.10.2.1.1.18.1.3
+        type: DisplayString
+      - labels: []
+        labelname: fsSystemElectricalSourceIsNormalIndex
       enum_values:
         1: noexist
         2: existnopower
@@ -38,28 +50,6 @@ modules:
         4: normal
         5: powerbutabnormal
         6: unknow
-    - name: fsSystemFanSpeed
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.4
-      type: gauge
-      help: This object displays the fan's speed. - 1.3.6.1.4.1.52642.1.1.10.2.1.1.21.1.4
-      indexes:
-      - labelname: fsSystemFanIsNormalIndex
-        type: gauge
-    - name: fsDeviceInfoSlotNumber
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.3
-      type: gauge
-      help: The number of slots exists on the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.3
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
     - name: fsDevicePowerStatus
       oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.4
       type: EnumAsStateSet
@@ -80,111 +70,6 @@ modules:
         2: rpsLinkAndNoPower
         3: rpsLinkAndReadyForPower
         4: rpsLinkAndPower
-    - name: fsDeviceMacAddress
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.5
-      type: PhysAddress48
-      help: The physical address of device - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.5
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
-    - name: fsDevicePriority
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.6
-      type: gauge
-      help: The device priority value - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.6
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
-    - name: fsDeviceAlias
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.7
-      type: DisplayString
-      help: Alias of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.7
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
-    - name: fsDeviceSWVersion
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.8
-      type: DisplayString
-      help: Description of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.8
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
-    - name: fsDeviceHWVersion
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.9
-      type: DisplayString
-      help: Description of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.9
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
-    - name: fsDeviceSerialNumber
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.10
-      type: DisplayString
-      help: Serial number of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.10
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
-    - name: fsDeviceOid
-      oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.11
-      type: OctetString
-      help: Oid number of the device. - 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.11
-      indexes:
-      - labelname: fsDeviceInfoIndex
-        type: gauge
-      lookups:
-      - labels:
-        - fsDeviceInfoIndex
-        labelname: fsDeviceInfoDescr
-        oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.2.1.2
-        type: DisplayString
-      - labels: []
-        labelname: fsDeviceInfoIndex
     - name: fsModuleTempState
       oid: 1.3.6.1.4.1.52642.1.1.10.2.21.1.4.1.3
       type: EnumAsStateSet
